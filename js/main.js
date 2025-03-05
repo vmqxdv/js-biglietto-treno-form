@@ -17,7 +17,15 @@ const inputForm = document.getElementById('ticket-price');
 inputForm.addEventListener('submit', function(event) {
   event.preventDefault();
 
-  const userAge = document.getElementById('user-age').value;
-  const userTravelLength = document.getElementById('user-travel-length').value;
 
+  const userAge = Number(document.getElementById('user-age').value);
+  const userTravelLength = Number(document.getElementById('user-travel-length').value);
+
+  if (isNaN(userAge) || isNaN(userTravelLength)) {
+    const alertDiv = document.getElementById('alert');
+
+    alertDiv.innerHTML = 'I dati che hai inserito non sono validi. Per favore inserisci solo numeri.'
+
+    return alertDiv.style.display = 'block';
+  };
 });
