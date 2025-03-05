@@ -16,17 +16,14 @@ const inputForm = document.getElementById('ticket-price');
 
 inputForm.addEventListener('submit', function(event) {
   event.preventDefault();
+  const alertDiv = document.getElementById('alert');
 
 
   const userAge = Number(document.getElementById('user-age').value);
+  getValidInput(alertDiv, userAge, 1, 200);
+
   const userTravelLength = Number(document.getElementById('user-travel-length').value);
-
-  const alertDiv = document.getElementById('alert');
-  if (isNaN(userAge) || isNaN(userTravelLength)) {
-    alertDiv.innerHTML = 'I dati che hai inserito non sono validi. Per favore inserisci solo numeri.'
-
-    return alertDiv.style.display = 'block';
-  };
+  getValidInput(alertDiv, userTravelLength, 0.01);
 
 
   const grossPrice = userTravelLength * 0.21;
@@ -56,4 +53,12 @@ function formatToEuro(num) {
     style: 'currency',
     currency: 'EUR'
   }).format(num);
+};
+
+function getValidInput(alert, input, min, max) {
+  if (isNaN(input) || input < min || (max !== undefined && input > max)) {
+    alert.innerHTML = 'I dati che hai inserito non sono validi. Per favore inserisci solo numeri.'
+
+    return alert.style.display = 'block';
+  };
 };
