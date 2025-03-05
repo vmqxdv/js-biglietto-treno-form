@@ -17,8 +17,7 @@ const inputForm = document.getElementById('ticket-price');
 inputForm.addEventListener('submit', function(event) {
   event.preventDefault();
 
-  const userAge = document.getElementById('user-age');
-  const userTravelLength = document.getElementById('user-travel-length');
+  const userAge = document.getElementById('user-age').value;
+  const userTravelLength = document.getElementById('user-travel-length').value;
 
-  console.log(userAge, userTravelLength);
 });
