@@ -14,4 +14,8 @@ del biglietto di viaggio, secondo le seguenti regole:
 
 const inputForm = document.getElementById('ticket-price');
 
-console.log(inputForm);
+inputForm.addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  console.log('test')
+});
