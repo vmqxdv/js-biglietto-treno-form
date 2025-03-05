@@ -21,11 +21,39 @@ inputForm.addEventListener('submit', function(event) {
   const userAge = Number(document.getElementById('user-age').value);
   const userTravelLength = Number(document.getElementById('user-travel-length').value);
 
+  const alertDiv = document.getElementById('alert');
   if (isNaN(userAge) || isNaN(userTravelLength)) {
-    const alertDiv = document.getElementById('alert');
-
     alertDiv.innerHTML = 'I dati che hai inserito non sono validi. Per favore inserisci solo numeri.'
 
     return alertDiv.style.display = 'block';
   };
+
+
+  const grossPrice = userTravelLength * 0.21;
+  
+  const discountCalc =
+    userAge < 18 ? 0.8 :
+    userAge > 65 ? 0.6 : 1;
+
+  const netPrice = grossPrice * discountCalc;
+
+  let completeMessage;
+
+  if (discountCalc < 1) {
+    completeMessage = `Prezzo: <s>${formatToEuro(grossPrice)}</s>  ${formatToEuro(netPrice)} Sconto: ${(discountCalc * 100) - 100}%`;
+  } else {
+    completeMessage = `Prezzo: ${formatToEuro(netPrice)}`;
+  };
+
+  alertDiv.innerHTML = completeMessage;
+
+  return alertDiv.style.display = 'block';
 });
+
+
+function formatToEuro(num) {
+  return new Intl.NumberFormat('it-IT', {
+    style: 'currency',
+    currency: 'EUR'
+  }).format(num);
+};
